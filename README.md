@@ -1,4 +1,4 @@
-# marineencyclopedia
+# Marine Encyclopedia
 
 ## Project setup
 ```
