@@ -77,6 +77,7 @@ export default {
   background-color: #003459 ;
   position: sticky;
   top: 0;
+  z-index: 1000;
 }
 .logo{
   height: 50px;

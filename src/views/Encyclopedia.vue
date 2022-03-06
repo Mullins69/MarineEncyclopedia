@@ -5,52 +5,48 @@
         <div class="col-12 topcol">
           <h1>Marine Life Encyclopedia</h1>
         </div>
-        <div class="col-3">
-
-          </div>
+        <div class="col-3"></div>
         <div class="col-6">
-            <p class="para">
-              Explore the Marine Life Encyclopedia to learn fun facts and more
-              about your favorite marine animals. From sharks and sea turtles to
-              ecosystems and corals, you’re in the right place to take a deep
-              dive into life under the sea.
-            </p>
-          </div>
-        <div class="col-3">
-
-          </div>
+          <p class="para">
+            Explore the Marine Life Encyclopedia to learn fun facts and more
+            about your favorite marine animals. From sharks and sea turtles to
+            ecosystems and corals, you’re in the right place to take a deep dive
+            into life under the sea.
+          </p>
+        </div>
+        <div class="col-3"></div>
       </div>
       <div class="row">
-        <div class="col-12 col-sm-12 col-md-12 col-lg-6 cephalopods">
+        <router-link to="Cephalopods" class="col-12 col-sm-12 col-md-12 col-lg-6 cephalopods enchover">
           <h2>CEPHALOPODS, CRUSTACEANS & OTHER SHELLFISH</h2>
-        </div>
-        <div class="col-12 col-sm-12 col-lg-6 corals">
+        </router-link>
+        <router-link to="Corals" class="col-12 col-sm-12 col-lg-6 corals enchover">
           <h2>CORALS AND OTHER INVERTEBRATES</h2>
-        </div>
+        </router-link>
       </div>
       <div class="row">
-        <div class="col-12 col-sm-12 col-lg-6 mammals">
+        <router-link to="Mammals" class="col-12 col-sm-12 col-lg-6 mammals enchover">
           <h2>MARINE MAMMALS</h2>
-        </div>
-        <div class="col-12 col-sm-12 col-lg-6 ecosystems">
+        </router-link>
+        <router-link to="ScienceAndEcosystems" class="col-12 col-sm-12 col-lg-6 ecosystems enchover">
           <h2>MARINE SCIENCE AND ECOSYSTEMS</h2>
-        </div>
+        </router-link>
       </div>
       <div class="row">
-        <div class="col-12 col-sm-12 col-lg-6 fishes">
+        <router-link to="Fishes" class="col-12 col-sm-12 col-lg-6 fishes enchover">
           <h2>OCEAN FISHES</h2>
-        </div>
-        <div class="col-12 col-sm-12 col-lg-6 turtles">
+        </router-link>
+        <router-link to="TurtlesAndReptiles" class="col-12 col-sm-12 col-lg-6 turtles enchover">
           <h2>SEA TURTLES & REPTILES</h2>
-        </div>
+        </router-link>
       </div>
       <div class="row">
-        <div class="col-12 col-sm-12 col-lg-6 seabirds">
+        <router-link to="Seabirds" class="col-12 col-sm-12 col-lg-6 seabirds enchover">
           <h2>SEABIRDS</h2>
-        </div>
-        <div class="col-12 col-sm-12 col-lg-6 sharks">
+        </router-link>
+        <router-link to="SharkAndRays" class="col-12 col-sm-12 col-lg-6 sharks enchover">
           <h2>SHARKS & RAYS</h2>
-        </div>
+        </router-link>
       </div>
     </div>
   </section>
@@ -62,8 +58,7 @@ export default {};
 
 <style scoped>
 .cephalopods {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url("../assets/encyclopediaimg/cephalopods/cephalopods.jpg");
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),url("../assets/encyclopediaimg/cephalopods/cephalopods.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 500px;
@@ -79,7 +74,7 @@ export default {};
 }
 .mammals {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url("../assets/encyclopediaimg/ecosystems/ecosystems.jpg");
+    url("../assets/encyclopediaimg/marinemammals/marinemammals.jpg");
 
   background-repeat: no-repeat;
   background-size: cover;
@@ -88,7 +83,7 @@ export default {};
 }
 .ecosystems {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url("../assets/encyclopediaimg/fish/fishes_alt.jpg");
+    url("../assets/encyclopediaimg/ecosystems/ecosystems.jpg");
 
   background-repeat: no-repeat;
   background-size: cover;
@@ -97,7 +92,7 @@ export default {};
 }
 .fishes {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url("../assets/encyclopediaimg/marinemammals/marinemammals.jpg");
+    url("../assets/encyclopediaimg/fish/fishes_alt.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 500px;
@@ -105,16 +100,14 @@ export default {};
 }
 .turtles {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url("../assets/encyclopediaimg/seabirds/seabirds.jpg");
+    url("../assets/encyclopediaimg/seaturtlesandreptiles/seaturtlesandreptiles.jpg");
 
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 500px;
-  background-position: center;
 }
 .seabirds {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url("../assets/encyclopediaimg/seaturtlesandreptiles/seaturtlesandreptiles.jpg");
+    url("../assets/encyclopediaimg/seabirds/seabirds.jpg");
 
   background-repeat: no-repeat;
   background-size: cover;
@@ -138,16 +131,18 @@ export default {};
 .turtles,
 .seabirds,
 .sharks {
+  text-decoration: none;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
-.para{
-    
-}
-.col-12:hover {
+
+.enchover:hover {
+  cursor: pointer;
+  filter: blur(1px) brightness(90%);
+  transition: all 250ms ease-in-out;
 }
 
 @media (min-width: 1200px) {
