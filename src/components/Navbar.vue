@@ -14,7 +14,7 @@
           <router-link class="nav-link" to="About">About</router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Encyclopedia</a>
+          <router-link class="nav-link" to="Encyclopedia">Encyclopedia</router-link>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Shop</a>
@@ -29,7 +29,7 @@
       </form>
       <ul class="navbar-nav dr mb-2 mb-lg-0">
          <li class="nav-item">
-          <a class="nav-link" href="#">Login</a>
+          <div class="nav-link"  data-bs-toggle="modal" data-bs-target="#mullinsModal">Login</div>
         </li>
           <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -44,11 +44,27 @@
     </div>
   </div>
 </nav>
+<!-- Modal -->
+<div class="modal fade" id="mullinsModal" tabindex="-1" aria-labelledby="mullinsModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <Login/>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
+  import Login from './Login.vue'
+
 export default {
 
+
+  components: {
+    Login
+  }
 }
 </script>
 

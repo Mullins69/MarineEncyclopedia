@@ -8,21 +8,24 @@
       <div class="col">
         <h1>Marine Life Encyclopedia</h1>
         <p>Explore the Marine Life Encyclopedia to learn fun facts and more about your favorite marine animals. From sharks and sea turtles to ecosystems and corals, you’re in the right place to take a deep dive into life under the sea.</p>
-        <button class="button">Encyclopedia</button>
+        <router-link class="button" to="Encyclopedia">Encyclopedia</router-link>
         <button class="button">Shop</button>
       </div>
     </div>
   </div> 
+
+
   </section>
 </template>
 
 <script>
-
+  import Login from '../components/Login.vue'
 
 export default {
+
   name: 'Home',
   components: {
-
+    Login
   }
 }
 </script>
