@@ -17,10 +17,10 @@
           <router-link class="nav-link" to="Encyclopedia">Encyclopedia</router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Shop</a>
+          <router-link class="nav-link" to="Shop">Shop</router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Support</a>
+           <router-link class="nav-link" to="Support">Support</router-link>
         </li>
       </ul>
       <form class="d-flex">
@@ -69,6 +69,7 @@ export default {
 </script>
 
 <style scoped>
+
 .dr{
   margin-right: auto;
   margin-left: auto;

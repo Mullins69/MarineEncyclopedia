@@ -9,7 +9,7 @@
         <h1>Marine Life Encyclopedia</h1>
         <p>Explore the Marine Life Encyclopedia to learn fun facts and more about your favorite marine animals. From sharks and sea turtles to ecosystems and corals, you’re in the right place to take a deep dive into life under the sea.</p>
         <router-link class="button" to="Encyclopedia">Encyclopedia</router-link>
-        <button class="button">Shop</button>
+        <router-link class="button" to="Shop">Shop</router-link>
       </div>
     </div>
   </div> 
