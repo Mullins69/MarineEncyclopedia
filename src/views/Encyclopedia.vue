@@ -6,7 +6,7 @@
           <h1>Marine Life Encyclopedia</h1>
         </div>
         <div class="col-3"></div>
-        <div class="col-6">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
           <p class="para">
             Explore the Marine Life Encyclopedia to learn fun facts and more
             about your favorite marine animals. From sharks and sea turtles to

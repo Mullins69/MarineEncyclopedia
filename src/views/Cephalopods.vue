@@ -378,7 +378,7 @@ border-radius:15px;
 
 .card:hover img
 {
-filter:blur(3px);
+filter:blur(1px);
 }
 
 

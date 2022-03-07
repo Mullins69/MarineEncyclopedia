@@ -36,7 +36,7 @@
             <i class="bi bi-person-circle"></i>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><router-link class="dropdown-item" to="Profile">Profile</router-link></li>
             <li><a class="dropdown-item" href="#">Logout</a></li>
           </ul>
         </li>
