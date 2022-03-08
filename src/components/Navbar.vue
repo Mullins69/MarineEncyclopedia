@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg  ">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img class="logo" src="../assets/logo.png" alt=""></a>
+    <router-link class="navbar-brand" to="/"><img class="logo" src="../assets/logo.png" alt=""></router-link>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -11,16 +11,16 @@
           <router-link class="nav-link active" aria-current="page" to="/">Home</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="About">About</router-link>
+          <router-link class="nav-link" :to="{name:'About'}">About</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="Encyclopedia">Encyclopedia</router-link>
+          <router-link class="nav-link" :to="{name: 'Encyclopedia'}">Encyclopedia</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="Shop">Shop</router-link>
+          <router-link class="nav-link"  :to="{name: 'Shop'}">Shop</router-link>
         </li>
         <li class="nav-item">
-           <router-link class="nav-link" to="Support">Support</router-link>
+           <router-link class="nav-link"  :to="{name: 'Support'}">Support</router-link>
         </li>
       </ul>
       <form class="d-flex">
@@ -36,8 +36,8 @@
             <i class="bi bi-person-circle"></i>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><router-link class="dropdown-item" to="Profile">Profile</router-link></li>
-            <li><a class="dropdown-item" href="#">Logout</a></li>
+            <li><router-link class="dropdown-item" :to="{name:'Profile'}">Profile</router-link></li>
+            <li><div @click="logout" class="dropdown-item" >Logout</div></li>
           </ul>
         </li>
       </ul>
@@ -54,6 +54,8 @@
     </div>
   </div>
 </div>
+<!-- Modal -->
+
 </template>
 
 <script>
@@ -64,12 +66,20 @@ export default {
 
   components: {
     Login
-  }
+  },
+  methods: {
+    logout() {
+      localStorage.clear();
+      alert("user logged out");
+    },
+  },
 }
 </script>
 
 <style scoped>
-
+.dropdown-item, .nav-link{
+  cursor: pointer;
+}
 .dr{
   margin-right: auto;
   margin-left: auto;

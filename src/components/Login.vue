@@ -29,7 +29,7 @@
       </div>
       <div class="row">
         <div class="col">
-          <form method="POST" action="/account/login/">
+          <form @submit.prevent="login">
               <div id="login-fields">
 
                   <div class="mb-4" >
@@ -37,7 +37,7 @@
                       <input
                         type="email"
                         aria-label="Email Address"
-
+                        v-model="email"
                         required
                         placeholder="Email Address"
                       />
@@ -45,6 +45,7 @@
                   </div>
                   <div class="mb-4" >
                     <input
+                     v-model="password"
                       type="password"
                       required
                       aria-label="Password"
@@ -55,6 +56,7 @@
                     class="btn btn-primary w-100 mb-2 text-uppercase"
                     type="submit"
                     aria-label="Sign In"
+                    data-bs-dismiss="modal"
                   >
                     <span class=""><span class="">Sign In</span></span>
                   </button>
@@ -78,7 +80,35 @@
 
 <script>
 export default {
-    
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    login() {
+      fetch("https://mullins-marine-api.herokuapp.com/users", {
+        method: "PATCH",
+        body: JSON.stringify({
+          email: this.email,
+          password: this.password,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          localStorage.setItem("jwt", json.jwt);
+          alert("User logged in");
+          this.$router.push({ name: "Profile" });
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    },
+  },
 };
 </script>
 

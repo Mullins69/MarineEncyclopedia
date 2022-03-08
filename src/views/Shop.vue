@@ -1,6 +1,7 @@
 <template>
   <section id="shop">
-    <button
+    <div class="container" v-if="product">
+      <button
       type="button"
       class="cart"
       data-bs-toggle="modal"
@@ -8,7 +9,6 @@
     >
       Cart
     </button>
-    <div class="container" v-if="product">
       <div class="row">
         <div class="col">
           <h1>Shop</h1>

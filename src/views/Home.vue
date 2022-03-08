@@ -33,6 +33,7 @@ export default {
 <style scoped>
 .button{
   margin-left: 30px;
+  text-decoration: none;
 }
 .container{
   color: white;
