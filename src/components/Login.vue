@@ -60,15 +60,8 @@
                   >
                     <span class=""><span class="">Sign In</span></span>
                   </button>
-
               </div>
-
             <fieldset class="text-left">
-              <p class="mt-4">
-                <a href="/account/password/reset/" id="forgotPassword"
-                  >Forget your password?</a
-                >
-              </p>
             </fieldset>
           </form>
         </div>

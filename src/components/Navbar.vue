@@ -23,10 +23,6 @@
            <router-link class="nav-link"  :to="{name: 'Support'}">Support</router-link>
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
       <ul class="navbar-nav dr mb-2 mb-lg-0">
          <li class="nav-item">
           <div class="nav-link"  data-bs-toggle="modal" data-bs-target="#mullinsModal">Login</div>
@@ -69,8 +65,16 @@ export default {
   },
   methods: {
     logout() {
+            if (!localStorage.getItem("jwt")) {
+        alert("No User To log Out");
+        return this.$router.push({ name: "Home" });
+      }
+      else{
       localStorage.clear();
       alert("user logged out");
+      this.$router.push({ name: "Home" });
+      }
+
     },
   },
 }

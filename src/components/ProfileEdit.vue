@@ -1,16 +1,16 @@
 <template>
-  <div class="container rounded bg-white mt-5 mb-5"  v-if="users">
+   <form class="container rounded bg-white mb-5 text-center" @submit.prevent="modUser" v-if="users">
     <div class="row">
-        <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" :src="users.img"><span class="font-weight-bold">{{users.fullname}}</span><span class="text-black-50">{{users.email}}</span><span> </span></div>
-        </div>
-        <div class="col-md-5 border-right">
-            <div class="p-3 py-5">
+        <div class="col-md-12 border-right">
+            <div class="py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Profile Settings</h4>
                 </div>
-                <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" :placeholder="users.fullname" value=""></div>
+                
+            </div>
+        </div>
+        <div class="row mt-2">
+                    <div class="col-md-12"><label class="labels">Name</label><input type="text" class="form-control" :placeholder="users.fullname" value=""></div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" :placeholder="users.phone_number" value=""></div>
@@ -22,47 +22,41 @@
                     <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" :placeholder="users.country" value=""></div>
                     <div class="col-md-6"><label class="labels">City/Region</label><input type="text" class="form-control" value="" :placeholder="users.city"></div>
                 </div>
-                <div class="mt-5 text-center"><button data-bs-toggle="modal" data-bs-target="#editUser" class="btn btn-primary profile-button" type="button">Edit</button></div>
-            </div>
-        </div>
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
     </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="editUser" tabindex="-1" aria-labelledby="editUserLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-        <ProfileEdit/>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Modal -->
+</form>
 </template>
 
 <script>
-import ProfileEdit from "../components/ProfileEdit.vue"
 export default {
-  components: {
-    ProfileEdit
-  },
+
   data() {
 
     return {
       users: null,
+      Name: "",
+      Email: "",
+      Password: "",
+      number: "",
       renderComponent: true,
       
     };
   },
+  
 methods: {
-  deleteUser(){
-    if(confirm("Do you really want to delete your profile?")){
-            if (!localStorage.getItem("jwt")) {
+  modUser(){
+      if (!localStorage.getItem("jwt")) {
         alert("User not logged in");
         return this.$router.push({ name: "Login" });
       }
-      fetch('https://mullins-marine-api.herokuapp.com/users', {
-      method: 'DELETE',
+      fetch("https://mullins-marine-api.herokuapp.com/users", {
+        method: "PUT",
+        body: JSON.stringify({
+          fullname: this.Name,
+          email: this.Email,
+          password: this.Password,
+          phone_number: this.number
+        }),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
           Authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -70,28 +64,15 @@ methods: {
       })
         .then((response) => response.json())
         .then((json) => {
-          alert("DELETED USER")
-          localStorage.clear();
-          return this.$router.push({ name: "Home" });
+          alert("User Updated");
+          this.$router.push({ name: "UserProfile" });
         })
         .catch((err) => {
           alert(err);
         });
-            }},
-  forceRerender() {
-        // Removing my-component from the DOM
-        this.renderComponent = false;
-
-        this.$nextTick(() => {
-          // Adding the component back in
-          this.renderComponent = true;
-        });
-      }
-    ,
-
-  
+  }
     },
-    mounted(){
+        mounted(){
       if (!localStorage.getItem("jwt")) {
         alert("User not logged in");
         return this.$router.push({ name: "Home" });
@@ -111,9 +92,6 @@ methods: {
           alert(err);
         });
     },
-    
-    
-    
 };
 </script>
 
