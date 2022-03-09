@@ -19,7 +19,7 @@
 </template>
 
 <script>
-  import Login from '../components/Login.vue'
+  import Login from '../views/Login.vue'
 
 export default {
 

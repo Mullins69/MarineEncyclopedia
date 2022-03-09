@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import ProfileEdit from "../components/ProfileEdit.vue"
+import ProfileEdit from "../views/ProfileEdit.vue"
 export default {
   components: {
     ProfileEdit

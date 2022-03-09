@@ -1,10 +1,9 @@
 <template>
-  <nav class="navbar navbar-expand-lg  ">
+  <nav class="navbar navbar-expand-lg  text-center ">
   <div class="container-fluid">
     <router-link class="navbar-brand" to="/"><img class="logo" src="../assets/logo.png" alt=""></router-link>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="bi bi-list navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -50,18 +49,27 @@
     </div>
   </div>
 </div>
-<!-- Modal -->
 
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <Register/>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
-  import Login from './Login.vue'
-
+  import Login from '../views/Login.vue'
+  import Register from '../views/Registration.vue'
 export default {
 
 
   components: {
-    Login
+    Login,
+    Register
   },
   methods: {
     logout() {
@@ -93,6 +101,10 @@ export default {
   position: sticky;
   top: 0;
   z-index: 1000;
+}
+.navbar-toggler{
+  color: white;
+  font-size: 2rem;
 }
 .logo{
   height: 50px;

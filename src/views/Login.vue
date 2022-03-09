@@ -6,7 +6,7 @@
       aria-label="Dialog open. Sign in to start taking action"
     >
       <div class="row">
-        <div class="col">
+        <div class="col-12">
           <p>
             Welcome back!
             <br />
@@ -14,10 +14,10 @@
           </p>
           <p>
             Not a ME Citizen yet?
-            <a
-              href="#"
+            <button
+             data-bs-toggle="modal" data-bs-target="#registerModal"
               aria-label="Not a Global Citizen yet? Sign up."
-              >Sign up</a
+              >Sign up</button
             >
           </p>
           <div class="horizontal-rule-with-text">
@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col">
+        <div class="col-12">
           <form @submit.prevent="login">
               <div id="login-fields">
 
@@ -68,11 +68,18 @@
       </div>
        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
     </div>
+    
   </section>
+  <!-- Modal -->
+
+<!-- Modal -->
 </template>
 
 <script>
+  
+
 export default {
+ 
   data() {
     return {
       email: "",
@@ -109,7 +116,7 @@ export default {
 
 .container {
   display: grid;
-  width: 50%;
+  width: 100%;
   min-width: 50%;
   justify-content: center;
   align-content: center;
