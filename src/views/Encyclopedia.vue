@@ -101,9 +101,10 @@ export default {};
 .turtles {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     url("../assets/encyclopediaimg/seaturtlesandreptiles/seaturtlesandreptiles.jpg");
-
-  background-repeat: no-repeat;
+ background-repeat: no-repeat;
   background-size: cover;
+  min-height: 500px;
+  background-position: center;
 }
 .seabirds {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
