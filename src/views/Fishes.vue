@@ -1,5 +1,5 @@
 <template>
-  <div class="container" v-if="cephalopods">
+  <div class="container" v-if="fishes">
     <div class="row">
       <div class="col">
         <h1>Ocean Fishes</h1>
@@ -18,15 +18,15 @@
     <div class="row justify-content-center">
       <div
         class="col-12 col-lg-4"
-        v-for="cephalopod of cephalopods"
-        :key="cephalopod._id"
+        v-for="fish of fishes"
+        :key="fish._id"
       >
         <div class="card my-5">
-          <img :src="cephalopod.img" class="card-img-top" alt="..." />
+          <img :src="fish.img" class="card-img-top" alt="..." />
           <h5 class="card-title text-light">
-            {{ cephalopod.title }}
+            {{ fish.title }}
           </h5>
-          <router-link class="btn btn-light" to="CephalopodsDetails"
+          <router-link class="btn btn-light" :to="{name: 'FishDetails', params: {id: fish._id}}"
             >Read More</router-link
           >
         </div>
@@ -67,11 +67,11 @@
 export default {
   data() {
     return {
-      cephalopods: null,
+      fishes: null,
     };
   },
   mounted() {
-    fetch("https://mullins-marine-api.herokuapp.com/cephalopod", {
+    fetch("https://mullins-marine-api.herokuapp.com/fish", {
       method: "GET",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -79,7 +79,7 @@ export default {
     })
       .then((response) => response.json())
       .then((json) => {
-        this.cephalopods = json;
+        this.fishes = json;
       })
       .catch((err) => {
         alert(console.log(err));

@@ -10,19 +10,20 @@
             </div>
         </div>
         <div class="row mt-2">
-                    <div class="col-md-12"><label class="labels">Name</label><input type="text" class="form-control" :placeholder="users.fullname" value=""></div>
+                    <div class="col-md-12"><label class="labels">Name</label><input type="text" class="form-control" :placeholder="users.fullname" v-model="name"></div>
+                    <div class="col-md-12"><label class="labels">Password</label><input type="passsword" class="form-control" placeholder="Password" v-model="passsword"></div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" :placeholder="users.phone_number" value=""></div>
-                    <div class="col-md-12"><label class="labels">Street Address</label><input type="text" class="form-control" :placeholder="users.street" value=""></div>
-                    <div class="col-md-12"><label class="labels">Zipcode</label><input type="text" class="form-control" :placeholder="users.zipcode" value=""></div>
-                    <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" :placeholder="users.email" value=""></div>
+                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" :placeholder="users.phone_number" v-model="phone_number"></div>
+                    <div class="col-md-12"><label class="labels">Street Address</label><input type="text" class="form-control" :placeholder="users.street" v-model="street"></div>
+                    <div class="col-md-12"><label class="labels">Zipcode</label><input type="text" class="form-control" :placeholder="users.zipcode" v-model="zipcode"></div>
+                    <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" :placeholder="users.email" v-model="email"></div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" :placeholder="users.country" value=""></div>
-                    <div class="col-md-6"><label class="labels">City/Region</label><input type="text" class="form-control" value="" :placeholder="users.city"></div>
+                    <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" :placeholder="users.country" v-model="country"></div>
+                    <div class="col-md-6"><label class="labels">City/Region</label><input type="text" class="form-control" v-model="city" :placeholder="users.city"></div>
                 </div>
-                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" data-bs-dismiss="modal" type="submit">Save Profile</button></div>
     </div>
 </form>
 </template>
@@ -34,10 +35,14 @@ export default {
 
     return {
       users: null,
-      Name: "",
-      Email: "",
-      Password: "",
-      number: "",
+      name: "",
+      email: "",
+      phone_number: "",
+      password: "",
+      street: "",
+      zipcode: "",
+      country: "",
+      city: "",
       renderComponent: true,
       
     };
@@ -52,10 +57,14 @@ methods: {
       fetch("https://mullins-marine-api.herokuapp.com/users", {
         method: "PUT",
         body: JSON.stringify({
-          fullname: this.Name,
-          email: this.Email,
-          password: this.Password,
-          phone_number: this.number
+          fullname: this.name,
+          email: this.email,
+          phone_number: this.phone_number,
+          password: this.password,
+          street: this.street,
+          zipcode: this.zipcode,
+          country: this.country,
+          city: this.city,
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -65,7 +74,7 @@ methods: {
         .then((response) => response.json())
         .then((json) => {
           alert("User Updated");
-          this.$router.push({ name: "UserProfile" });
+          this.$router.go()
         })
         .catch((err) => {
           alert(err);
@@ -102,7 +111,7 @@ methods: {
 }
 
 .profile-button {
-    background: rgb(0, 0, 0);
+    background: #003459;
     box-shadow: none;
     border: none
 }
@@ -112,17 +121,17 @@ methods: {
 }
 
 .profile-button:focus {
-    background: #682773;
+    background: #000000;
     box-shadow: none
 }
 
 .profile-button:active {
-    background: #682773;
+    background: #000000;
     box-shadow: none
 }
 
 .back:hover {
-    color: #682773;
+    color: #000000;
     cursor: pointer
 }
 

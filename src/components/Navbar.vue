@@ -110,8 +110,6 @@ export default {
   height: 50px;
 }
 .nav-link {
-
-  margin-left: 10%;
   color: white;
 
 }

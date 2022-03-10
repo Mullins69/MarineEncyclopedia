@@ -62,7 +62,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../components/CephalopodsDetails'),
+    component: () => import(/* webpackChunkName: "about" */ '../views/CephalopodsDetails'),
     props: true
   },
   {
@@ -74,12 +74,30 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Corals.vue')
   },
   {
+    path: '/Corals/:id',
+    name: 'CoralDetails',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/CoralDetails.vue'),
+    props: true
+  },
+  {
     path: '/Mammals',
     name: 'Mammals',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Mammals.vue')
+  },
+  {
+    path: '/Mammals/:id',
+    name: 'MammalDetails',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/MammalDetails.vue'),
+    props: true
   },
   {
     path: '/ScienceAndEcosystems',
@@ -90,6 +108,15 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/ScienceAndEcosystems.vue')
   },
   {
+    path: '/ScienceAndEcosystems/:id',
+    name: 'EcosystemDetails',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/EcosystemDetails.vue'),
+    props: true
+  },
+  {
     path: '/Fishes',
     name: 'Fishes',
     // route level code-splitting
@@ -98,12 +125,30 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Fishes.vue')
   },
   {
+    path: '/Fish/:id',
+    name: 'FishDetails',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/FishDetails.vue'),
+    props: true
+  },
+  {
     path: '/TurtlesAndReptiles',
     name: 'TurtlesAndReptiles',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/TurtlesAndReptiles.vue')
+  },
+  {
+    path: '/TurtlesAndReptiles/:id',
+    name: 'ReptileDetails',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/ReptileDetails.vue'),
+    props: true
   },
   {
     path: '/Seabirds',

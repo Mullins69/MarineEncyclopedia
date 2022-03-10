@@ -2,13 +2,13 @@
   <section id="shop">
     <div class="container" v-if="product">
       <button
-      type="button"
-      class="cart"
-      data-bs-toggle="modal"
-      data-bs-target="#exampleModal"
-    >
-      Cart
-    </button>
+        type="button"
+        class="cart"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        Cart
+      </button>
       <div class="row">
         <div class="col">
           <h1>Shop</h1>
@@ -64,7 +64,7 @@
                 <span class="fw-bold fs-2">R{{ products.price }}</span>
               </div>
               <div class="text-center">
-                <button type="button" class="btn btncolor">Add to cart</button>
+                <button type="button" class="btn btncolor"  @click="addToCart(products._id)">Add to cart</button>
               </div>
             </div>
           </div>
@@ -110,7 +110,6 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
           <button
             type="button"
             class="btn-close"
@@ -118,7 +117,9 @@
             aria-label="Close"
           ></button>
         </div>
-        <div class="modal-body">...</div>
+        <div class="modal-body">
+          <Cart />
+        </div>
         <div class="modal-footer">
           <button
             type="button"
@@ -127,7 +128,6 @@
           >
             Close
           </button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
@@ -135,13 +135,41 @@
 </template>
 
 <script>
+import Cart from "../components/Cart.vue";
 export default {
+  components: {
+    Cart,
+  },
   data() {
     return {
       product: null,
+      cart: 1,
       search: "",
     };
   },
+  methods:{
+       addToCart(id){
+        fetch(`https://mullins-marine-api.herokuapp.com/users/${id}/cart`, {
+        method: "POST",
+        body: JSON.stringify({
+          quantity: this.cart,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+           Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          alert("Added to Cart");
+          this.$router.go()
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    }
+  }
+  ,
   mounted() {
     fetch("https://mullins-marine-api.herokuapp.com/product", {
       method: "GET",

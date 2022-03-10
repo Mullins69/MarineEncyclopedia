@@ -1,24 +1,24 @@
 <template>
-  <div class="container" v-if="cephalopods">
+  <div class="container" v-if="ecosystems">
       <div class="row">
           <div class="col">
-              <h1>Marine Science and Ecosystems</h1>
+              <h1>Marine Science and ecosystemss</h1>
           </div>
       </div>
       <div class="row">
           <div class="col">
-            <p>Marine science and ecosystems are crucial to understanding how to keep our oceans and marine life healthy and abundant. Ecosystems widely vary from fjords in Scandinavia and Chile to common beaches to deep hydrothermal vents.</p>
-            <p>Learn fun facts about marine science and ecosystems, and learn how you can help by clicking a category below.</p>
+            <p>Marine science and ecosystemss are crucial to understanding how to keep our oceans and marine life healthy and abundant. ecosystemss widely vary from fjords in Scandinavia and Chile to common beaches to deep hydrothermal vents.</p>
+            <p>Learn fun facts about marine science and ecosystemss, and learn how you can help by clicking a category below.</p>
           </div>
       </div>
       <div class="row justify-content-center">
-			<div class="col-12 col-lg-4" v-for="cephalopod of cephalopods" :key="cephalopod._id">
+			<div class="col-12 col-lg-4" v-for="ecosystem of ecosystems" :key="ecosystem._id">
 				<div class="card my-5">
-					<img :src="cephalopod.img" class="card-img-top" alt="...">
+					<img :src="ecosystem.img" class="card-img-top" alt="...">
 					<h5 class="card-title text-light">
-						{{cephalopod.title}}
+						{{ecosystem.title}}
 					</h5>
-					<router-link class="btn btn-light" to="CephalopodsDetails">Read More</router-link>
+					<router-link class="btn btn-light" :to="{name: 'EcosystemDetails', params: {id: ecosystem._id}}">Read More</router-link>
 				</div>
 			</div>
 		</div>
@@ -57,11 +57,11 @@
 export default {
     data(){
         return{
-            cephalopods : null
+            ecosystems : null
         }
     },
     mounted() {
-      fetch("https://mullins-marine-api.herokuapp.com/cephalopod", {
+      fetch("https://mullins-marine-api.herokuapp.com/ecosystem", {
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -70,7 +70,7 @@ export default {
       })
         .then((response) => response.json())
         .then((json) => {
-          this.cephalopods = json;
+          this.ecosystems = json;
         })
         .catch((err) => {
           alert(console.log(err));

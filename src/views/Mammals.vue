@@ -27,7 +27,7 @@
           <h5 class="card-title text-light">
             {{ mammals.title }}
           </h5>
-          <router-link class="btn btn-light" to="mammalDetails"
+          <router-link class="btn btn-light"  :to="{name: 'MammalDetails', params: {id: mammals._id}}"
             >Read More</router-link
           >
         </div>
