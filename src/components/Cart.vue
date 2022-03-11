@@ -43,6 +43,11 @@ export default {
   methods: {
    },
   mounted(){
+    if (!localStorage.getItem("jwt")) {
+        alert("Please Create Account First");
+        return this.$router.push({ name: "Shop" });
+      }
+      else{
     fetch("https://mullins-marine-api.herokuapp.com/users/cart", {
         method: "GET",
         headers: {
@@ -58,6 +63,7 @@ export default {
         .catch((err) => {
           alert(err);
         });
+  }
   }
 }
 </script>

@@ -2,6 +2,7 @@
   <section id="shop">
     <div class="container" v-if="product">
       <button
+      @click="isModalVisible = true"
         type="button"
         class="cart"
         data-bs-toggle="modal"
@@ -64,7 +65,13 @@
                 <span class="fw-bold fs-2">R{{ products.price }}</span>
               </div>
               <div class="text-center">
-                <button type="button" class="btn btncolor"  @click="addToCart(products._id)">Add to cart</button>
+                <button
+                  type="button"
+                  class="btn btncolor"
+                  @click="addToCart(products._id)"
+                >
+                  Add to cart
+                </button>
               </div>
             </div>
           </div>
@@ -101,6 +108,7 @@
     </div>
   </section>
   <div
+    v-if="isModalVisible"
     class="modal fade"
     id="exampleModal"
     tabindex="-1"
@@ -143,33 +151,41 @@ export default {
   data() {
     return {
       product: null,
-      cart: 1,
       search: "",
+       isModalVisible: false
     };
   },
-  methods:{
-       addToCart(id){
-        fetch(`https://mullins-marine-api.herokuapp.com/users/${id}/cart`, {
+  methods: {
+    addToCart(id) {
+      if (!localStorage.getItem("jwt")) {
+        alert("User not logged in");
+        return this.$router.push({ name: "Shop" });
+      }
+      else{
+        let cart = 1;
+         fetch(`https://mullins-marine-api.herokuapp.com/users/${id}/cart`, {
         method: "POST",
         body: JSON.stringify({
-          quantity: this.cart,
+          
+          quantity: cart,
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
-           Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
         },
       })
         .then((response) => response.json())
         .then((json) => {
           alert("Added to Cart");
-          this.$router.go()
+          this.$router.go();
         })
         .catch((err) => {
           alert(err);
         });
-    }
-  }
-  ,
+      }
+     
+    },
+  },
   mounted() {
     fetch("https://mullins-marine-api.herokuapp.com/product", {
       method: "GET",
@@ -182,7 +198,8 @@ export default {
         this.product = json;
       })
       .catch((err) => {
-        alert(console.log(err));
+        alert(err)
+        console.log(err);
       });
   },
   computed: {
