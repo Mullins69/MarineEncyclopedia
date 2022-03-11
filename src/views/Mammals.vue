@@ -320,33 +320,33 @@ h5 {
 }
 
 div.col-12:nth-child(1) > .card:nth-child(1) > .btn:nth-child(3):hover {
-  background-color: Navy;
+  background-color: #003459;
 }
 
 div.col-12:nth-child(2) > .card:nth-child(1) > .btn:nth-child(3):hover {
-  background-color: Navy;
+  background-color: #003459;
 }
 
 div.col-12:nth-child(3) > .card:nth-child(1) > .btn:nth-child(3):hover {
-  background-color: Navy;
+  background-color: #003459;
 }
 div.col-12:nth-child(4) > .card:nth-child(1) > .btn:nth-child(3):hover {
-  background-color: Navy;
+  background-color: #003459;
 }
 div.col-12:nth-child(5) > .card:nth-child(1) > .btn:nth-child(3):hover {
-  background-color: Navy;
+  background-color: #003459;
 }
 div.col-12:nth-child(6) > .card:nth-child(1) > .btn:nth-child(3):hover {
-  background-color: Navy;
+  background-color: #003459;
 }
 div.col-12:nth-child(7) > .card:nth-child(1) > .btn:nth-child(3):hover {
-  background-color: Navy;
+  background-color: #003459;
 }
 div.col-12:nth-child(8) > .card:nth-child(1) > .btn:nth-child(3):hover {
-  background-color: Navy;
+  background-color: #003459;
 }
 div.col-12:nth-child(9) > .card:nth-child(1) > .btn:nth-child(3):hover {
-  background-color: Navy;
+  background-color: #003459;
 }
 
 .card img {
