@@ -11,7 +11,7 @@
         </div>
         <div class="row mt-2">
                     <div class="col-md-12"><label class="labels">Name</label><input type="text" class="form-control" :placeholder="users.fullname" v-model="name"></div>
-                    <div class="col-md-12"><label class="labels">Password</label><input type="passsword" class="form-control" placeholder="Password" v-model="passsword"></div>
+                    <div class="col-md-12"><label class="labels">Password</label><input type="password" class="form-control" placeholder="Password" v-model="password"></div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" :placeholder="users.phone_number" v-model="phone_number"></div>

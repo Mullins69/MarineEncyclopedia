@@ -94,10 +94,8 @@ export default {
     };
   },
   methods: {
-    async login() {
-      this.loading = true
-      try {
-        fetch("https://mullins-marine-api.herokuapp.com/users", {
+    login() {
+      fetch("https://mullins-marine-api.herokuapp.com/users", {
         method: "PATCH",
         body: JSON.stringify({
           email: this.email,
@@ -109,15 +107,19 @@ export default {
       })
         .then((response) => response.json())
         .then((json) => {
-          localStorage.setItem("jwt", json.jwt);
-          alert("User logged in");
-          
-          this.$router.push({ name: "Profile" });
+          if(json.jwt){
+            localStorage.setItem("jwt", json.jwt);
+          }
+          if(localStorage.getItem("jwt")){
+            this.$router.push({ name: "Profile" });
+          }
+          else{
+            alert("Incorrect Credentials");
+          }
         })
-      } catch (err) {
-        alert(err);
-
-      }
+        .catch((err) => {
+          alert(err);
+        });
     },
   },
 };
