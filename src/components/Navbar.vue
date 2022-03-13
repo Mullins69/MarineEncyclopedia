@@ -59,13 +59,19 @@
     </div>
   </div>
 </div>
+
+   
 </template>
 
 <script>
   import Login from '../views/Login.vue'
   import Register from '../views/Registration.vue'
 export default {
-
+  data(){
+    return{
+     
+    }
+  },
 
   components: {
     Login,

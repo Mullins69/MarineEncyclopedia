@@ -2,7 +2,7 @@
   <section id="shop">
     <div class="container" v-if="product">
       <button
-      @click="isModalVisible = true"
+        @click="isModalVisible = true"
         type="button"
         class="cart"
         data-bs-toggle="modal"
@@ -72,6 +72,21 @@
                 >
                   Add to cart
                 </button>
+                <div v-if="isadmin == true">
+                  <router-link
+                    class="btn btn-warning"
+                    :to="{name: 'EditProduct', params: {id: products._id}}"
+                  >
+                    Edit product
+                  </router-link>
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    @click="deleteProduct(products._id)"
+                  >
+                    Delete product
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -107,6 +122,7 @@
       </div>
     </div>
   </section>
+
   <div
     v-if="isModalVisible"
     class="modal fade"
@@ -147,43 +163,63 @@ import Cart from "../components/Cart.vue";
 export default {
   components: {
     Cart,
+
   },
   data() {
     return {
       product: null,
       search: "",
-       isModalVisible: false
+      isModalVisible: false,
+      isadmin: false,
     };
   },
   methods: {
+    
     addToCart(id) {
       if (!localStorage.getItem("jwt")) {
         alert("User not logged in");
         return this.$router.push({ name: "Shop" });
-      }
-      else{
+      } else {
         let cart = 1;
-         fetch(`https://mullins-marine-api.herokuapp.com/users/${id}/cart`, {
-        method: "POST",
-        body: JSON.stringify({
-          
-          quantity: cart,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((json) => {
-          alert("Added to Cart");
-          this.$router.go();
+        fetch(`https://mullins-marine-api.herokuapp.com/users/${id}/cart`, {
+          method: "POST",
+          body: JSON.stringify({
+            quantity: cart,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
         })
-        .catch((err) => {
-          alert(err);
-        });
+          .then((response) => response.json())
+          .then((json) => {
+            alert("Added to Cart");
+            this.$router.go();
+          })
+          .catch((err) => {
+            alert(err);
+          });
       }
-     
+    },
+    deleteProduct(id) {
+      if (confirm("Do you really want to delete this product?")) {
+        if (this.isadmin == true) {
+          fetch("https://mullins-marine-api.herokuapp.com/product/" + id, {
+            method: "DELETE",
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            },
+          })
+            .then((response) => response.json())
+            .then((json) => {
+              alert("DELETED PRODUCT");
+            })
+            .catch((err) => {
+              alert(err);
+            });
+        }
+      }
     },
   },
   mounted() {
@@ -196,9 +232,28 @@ export default {
       .then((response) => response.json())
       .then((json) => {
         this.product = json;
+        if (localStorage.getItem("jwt")) {
+          fetch("https://mullins-marine-api.herokuapp.com/users/oneuser/", {
+            method: "GET",
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+            },
+          })
+            .then((response) => response.json())
+            .then((json) => {
+              if (json.isadmin == true) {
+                alert("You are admin");
+                this.isadmin = json.isadmin;
+              }
+            })
+            .catch((err) => {
+              alert(err);
+            });
+        }
       })
       .catch((err) => {
-        alert(err)
+        alert(err);
         console.log(err);
       });
   },
@@ -393,6 +448,13 @@ export default {
 
 .btncolor {
   background-color: #003459;
+  border-radius: 55555px;
+  padding: 1rem 2rem !important;
+  color: #ffff;
+  margin-bottom: 2rem;
+}
+.btn-danger,
+.btn-warning {
   border-radius: 55555px;
   padding: 1rem 2rem !important;
   color: #ffff;
