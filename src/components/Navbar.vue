@@ -21,6 +21,9 @@
         <li class="nav-item">
            <router-link class="nav-link"  :to="{name: 'Support'}">Support</router-link>
         </li>
+        <li class="nav-item">
+           <router-link class="nav-link"  :to="{name: 'Contact'}">ContactUs</router-link>
+        </li>
       </ul>
       <ul class="navbar-nav dr mb-2 mb-lg-0">
          <li class="nav-item">
