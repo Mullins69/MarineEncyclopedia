@@ -121,9 +121,7 @@
         </div>
       </div>
     </div>
-  </section>
-
-  <div
+     <div
     v-if="isModalVisible"
     class="modal fade"
     id="exampleModal"
@@ -156,6 +154,9 @@
       </div>
     </div>
   </div>
+  </section>
+
+ 
 </template>
 
 <script>

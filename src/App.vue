@@ -1,8 +1,11 @@
 <template>
   <Navbar/>
 
-  <router-view/>
-
+  <router-view v-slot="{ Component }">
+  <transition name="fade" mode="out-in">
+    <component :is="Component" />
+  </transition>
+</router-view>
 </template>
 
 <script>
@@ -20,5 +23,15 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 body{
   font-family: 'Open Sans', sans-serif !important; 
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

@@ -25,6 +25,73 @@ WE GIVE our profits made from the onsite store  and donations to help bring clea
           </p>
         </div>
       </div>
+      <div class="row">
+        <div class="col">
+          <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="../assets/carousel/pic.jpg" class="d-block w-100" alt="pic">
+    </div>
+    <div class="carousel-item">
+      <img src="../assets/carousel/pic2.jpg" class="d-block w-100" alt="pic">
+    </div>
+    <div class="carousel-item">
+      <img src="../assets/carousel/pic3.jpg" class="d-block w-100" alt="pic">
+    </div>
+    <div class="carousel-item">
+      <img src="../assets/carousel/pic4.jpg" class="d-block w-100" alt="pic">
+    </div>
+    <div class="carousel-item">
+      <img src="../assets/carousel/pic5.jpg" class="d-block w-100" alt="pic">
+    </div>
+    <div class="carousel-item">
+      <img src="../assets/carousel/pic6.jpg" class="d-block w-100" alt="pic">
+    </div>
+    <div class="carousel-item">
+      <img src="../assets/carousel/pic7.jpg" class="d-block w-100" alt="pic">
+    </div>
+    <div class="carousel-item">
+      <img src="../assets/carousel/pic8.jpg" class="d-block w-100" alt="pic">
+    </div>
+    <div class="carousel-item">
+      <img src="../assets/carousel/pic9.jpg" class="d-block w-100" alt="pic">
+    </div>
+    <div class="carousel-item">
+      <img src="../assets/carousel/pic10.jpg" class="d-block w-100" alt="pic">
+    </div>
+    <div class="carousel-item">
+      <img src="../assets/carousel/pic11.jpg" class="d-block w-100" alt="pic">
+    </div>
+    <div class="carousel-item">
+      <img src="../assets/carousel/pic12.jpg" class="d-block w-100" alt="pic">
+    </div>
+    <div class="carousel-item">
+      <img src="../assets/carousel/pic13.jpg" class="d-block w-100" alt="pic">
+    </div>
+    <div class="carousel-item">
+      <img src="../assets/carousel/pic14.jpg" class="d-block w-100" alt="pic">
+    </div>
+    <div class="carousel-item">
+      <img src="../assets/carousel/pic15.jpg" class="d-block w-100" alt="pic">
+    </div>
+    <div class="carousel-item">
+      <img src="../assets/carousel/pic16.jpg" class="d-block w-100" alt="pic">
+    </div>
+    <div class="carousel-item">
+      <img src="../assets/carousel/pic17.jpg" class="d-block w-100" alt="pic">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -33,5 +100,8 @@ WE GIVE our profits made from the onsite store  and donations to help bring clea
 export default {};
 </script>
 
-<style>
+<style scoped>
+.carousel, .d-block{
+  height: max-content ;
+}
 </style>

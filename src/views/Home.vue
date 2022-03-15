@@ -8,8 +8,10 @@
       <div class="col">
         <h1>Marine Life Encyclopedia</h1>
         <p>Explore the Marine Life Encyclopedia to learn fun facts and more about your favorite marine animals. From sharks and sea turtles to ecosystems and corals, you’re in the right place to take a deep dive into life under the sea.</p>
-        <router-link class="button" to="Encyclopedia">Encyclopedia</router-link>
-        <router-link class="button" to="Shop">Shop</router-link>
+        <router-link to="Encyclopedia"><button class="button" >
+          Encyclopedia</button></router-link>
+        <router-link to="Shop"><button class="button" >
+          Shop</button></router-link>
       </div>
     </div>
   </div> 
@@ -26,14 +28,30 @@ export default {
   name: 'Home',
   components: {
     Login
+  },
+  mounted(){
+    
   }
 }
 </script>
 
 <style scoped>
+
 .button{
   margin-left: 30px;
   text-decoration: none;
+  background-color: #003459;
+
+  color: white;
+
+  border-radius: 300px;
+  border: none;
+  width: 120px;
+  height: 40px;
+}
+.button:hover{
+  transform: scale(1.1);
+
 }
 .container{
   color: white;
@@ -43,13 +61,16 @@ export default {
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
-    z-index: -1;
+    z-index: 1;
 }
 .Home{
 
+   width: 100%;
+  
 
 }
 #myVideo {
+  
   z-index: -1000;
   position: absolute;
   right: 0;
