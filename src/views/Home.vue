@@ -34,6 +34,10 @@ export default {
     Login,
   },
   mounted() {
+    $(".Home").ripples({
+  resolution: 200,
+  perturbance: 0.04,
+});
   },
 };
 </script>
@@ -58,15 +62,18 @@ export default {
   color: white;
   position: absolute;
   text-align: center;
-  top: 50%;
+  top: 42%;
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
   z-index: 1;
 }
 .Home {
+padding: 0;
+  margin: 0;
   width: 100%;
- 
+  height: 100vh;
+  position: fixed;
 }
 #myVideo {
   z-index: -1000;

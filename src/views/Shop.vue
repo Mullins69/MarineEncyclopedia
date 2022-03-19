@@ -17,8 +17,12 @@
       </div>
       <div class="row">
         <div class="col-4">
-          <select class="form-select" aria-label="Default select example">
-            <option selected>Filter</option>
+          <select
+            v-model="selected"
+            class="form-select"
+            aria-label="Default select example"
+          >
+            <option selected value="">Display All</option>
             <option value="mask">Masks</option>
             <option value="wetsuits">Wetsuits</option>
             <option value="camera">Camera</option>
@@ -75,7 +79,7 @@
                 <div v-if="isadmin == true">
                   <router-link
                     class="btn btn-warning"
-                    :to="{name: 'EditProduct', params: {id: products._id}}"
+                    :to="{ name: 'EditProduct', params: { id: products._id } }"
                   >
                     Edit product
                   </router-link>
@@ -121,47 +125,53 @@
         </div>
       </div>
     </div>
-     <div
-    v-if="isModalVisible"
-    class="modal fade"
-    id="exampleModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <Cart />
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Close
-          </button>
-                <a href="#"><button id="btn-checkout" class="btn btn-primary"><span>Checkout</span></button></a>
+    <div
+      v-if="isModalVisible"
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <Cart />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <a href="#"
+              ><button id="btn-checkout" class="btn btn-primary">
+                <span>Checkout</span>
+              </button></a
+            >
 
-      <button class="btn btn-secondary"             data-bs-dismiss="modal"
- @click="clearCart">Clear Cart</button>
-
+            <button
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              @click="clearCart"
+            >
+              Clear Cart
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   </section>
-
- 
 </template>
 
 <script>
@@ -169,7 +179,6 @@ import Cart from "../components/Cart.vue";
 export default {
   components: {
     Cart,
-
   },
   data() {
     return {
@@ -177,10 +186,11 @@ export default {
       search: "",
       isModalVisible: false,
       isadmin: false,
+      selected: "",
     };
   },
   methods: {
-     clearCart(){
+    clearCart() {
       fetch("https://mullins-marine-api.herokuapp.com/cart/", {
         method: "DELETE",
         headers: {
@@ -190,8 +200,8 @@ export default {
       })
         .then((response) => response.json())
         .then((json) => {
-            location.reload();
-          })
+          location.reload();
+        })
         .catch((err) => {
           alert(err);
         });
@@ -235,7 +245,7 @@ export default {
             .then((response) => response.json())
             .then((json) => {
               alert("DELETED PRODUCT");
-              location.reload()
+              location.reload();
             })
             .catch((err) => {
               alert(err);
@@ -267,7 +277,6 @@ export default {
               if (json.isadmin == true) {
                 alert("You are admin");
                 this.isadmin = json.isadmin;
-                
               }
             })
             .catch((err) => {
@@ -282,9 +291,34 @@ export default {
   },
   computed: {
     filterProducts: function () {
-      return this.product.filter((product) => {
-        return product.title.match(this.search);
-      });
+      let filtered = this.product
+      if (this.selected == '') {
+          filtered = filtered.filter((product) => {
+           return product.category.match(this.selected) ;
+          
+        });
+        if(this.search){
+          filtered = filtered.filter((product) =>{
+            return product.title.match(this.search)
+          })
+        }
+        return filtered
+      }
+      if (this.selected) {
+        filtered = filtered.filter((product) => {
+           return product.category.match(this.selected) ;
+          
+        });
+        if(this.search){
+          filtered = filtered.filter((product) =>{
+            return product.title.match(this.search)
+          })
+        }
+        return filtered
+        
+      }
+  
+      
     },
   },
 };

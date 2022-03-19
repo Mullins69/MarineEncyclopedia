@@ -112,9 +112,6 @@ export default {
         alert(err);
       });
     }
-    else{
-      this.loggedin = false
-    }
   },
   }
 
