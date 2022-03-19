@@ -150,6 +150,11 @@
           >
             Close
           </button>
+                <a href="#"><button id="btn-checkout" class="btn btn-primary"><span>Checkout</span></button></a>
+
+      <button class="btn btn-secondary"             data-bs-dismiss="modal"
+ @click="clearCart">Clear Cart</button>
+
         </div>
       </div>
     </div>
@@ -175,14 +180,29 @@ export default {
     };
   },
   methods: {
-    
+     clearCart(){
+      fetch("https://mullins-marine-api.herokuapp.com/cart/", {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+            location.reload();
+          })
+        .catch((err) => {
+          alert(err);
+        });
+    },
     addToCart(id) {
       if (!localStorage.getItem("jwt")) {
         alert("User not logged in");
         return this.$router.push({ name: "Shop" });
       } else {
         let cart = 1;
-        fetch(`https://mullins-marine-api.herokuapp.com/users/${id}/cart`, {
+        fetch(`https://mullins-marine-api.herokuapp.com/cart/${id}/`, {
           method: "POST",
           body: JSON.stringify({
             quantity: cart,
@@ -195,7 +215,7 @@ export default {
           .then((response) => response.json())
           .then((json) => {
             alert("Added to Cart");
-            this.$router.go();
+            location.reload();
           })
           .catch((err) => {
             alert(err);
@@ -215,6 +235,7 @@ export default {
             .then((response) => response.json())
             .then((json) => {
               alert("DELETED PRODUCT");
+              location.reload()
             })
             .catch((err) => {
               alert(err);
@@ -246,6 +267,7 @@ export default {
               if (json.isadmin == true) {
                 alert("You are admin");
                 this.isadmin = json.isadmin;
+                
               }
             })
             .catch((err) => {

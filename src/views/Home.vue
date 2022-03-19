@@ -1,43 +1,45 @@
 <template>
   <section class="Home">
-   <video autoplay muted loop id="myVideo">
-  <source src="../assets/MessyViciousArchaeocete.mp4" type="video/mp4">
-</video>
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <h1>Marine Life Encyclopedia</h1>
-        <p>Explore the Marine Life Encyclopedia to learn fun facts and more about your favorite marine animals. From sharks and sea turtles to ecosystems and corals, you’re in the right place to take a deep dive into life under the sea.</p>
-        <router-link to="Encyclopedia"><button class="button" >
-          Encyclopedia</button></router-link>
-        <router-link to="Shop"><button class="button" >
-          Shop</button></router-link>
+    <video autoplay muted loop id="myVideo" class="myVideo">
+      <source src="../assets/MessyViciousArchaeocete.mp4" type="video/mp4" />
+    </video>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h1>Marine Life Encyclopedia</h1>
+          <p>
+            Explore the Marine Life Encyclopedia to learn fun facts and more
+            about your favorite marine animals. From sharks and sea turtles to
+            ecosystems and corals, you’re in the right place to take a deep dive
+            into life under the sea.
+          </p>
+          <router-link to="Encyclopedia"
+            ><button class="button">Encyclopedia</button></router-link
+          >
+          <router-link to="Shop"
+            ><button class="button">Shop</button></router-link
+          >
+        </div>
       </div>
     </div>
-  </div> 
-
-
   </section>
 </template>
 
 <script>
-  import Login from '../views/Login.vue'
+import Login from "../views/Login.vue";
 
 export default {
-
-  name: 'Home',
+  name: "Home",
   components: {
-    Login
+    Login,
   },
-  mounted(){
-    
-  }
-}
+  mounted() {
+  },
+};
 </script>
 
 <style scoped>
-
-.button{
+.button {
   margin-left: 30px;
   text-decoration: none;
   background-color: #003459;
@@ -49,28 +51,24 @@ export default {
   width: 120px;
   height: 40px;
 }
-.button:hover{
+.button:hover {
   transform: scale(1.1);
-
 }
-.container{
+.container {
   color: white;
-   position: absolute;
-   text-align: center;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
-.Home{
-
-   width: 100%;
-  
-
+.Home {
+  width: 100%;
+ 
 }
 #myVideo {
-  
   z-index: -1000;
   position: absolute;
   right: 0;

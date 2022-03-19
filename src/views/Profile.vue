@@ -159,19 +159,10 @@ export default {
           });
       }
     },
-    forceRerender() {
-      // Removing my-component from the DOM
-      this.renderComponent = false;
 
-      this.$nextTick(() => {
-        // Adding the component back in
-        this.renderComponent = true;
-      });
-    },
   },
   mounted() {
     if (!localStorage.getItem("jwt")) {
-      alert("User not logged in");
       return this.$router.push({ name: "Home" });
     }
     fetch("https://mullins-marine-api.herokuapp.com/users/oneuser/", {

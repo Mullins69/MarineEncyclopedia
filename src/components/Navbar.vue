@@ -26,7 +26,7 @@
         </li>
       </ul>
       <ul class="navbar-nav dr mb-2 mb-lg-0">
-         <li class="nav-item">
+         <li class="nav-item" v-if="this.loggedin == false">
           <div class="nav-link"  data-bs-toggle="modal" data-bs-target="#mullinsModal">Login</div>
         </li>
           <li class="nav-item dropdown">
@@ -35,7 +35,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><router-link class="dropdown-item" :to="{name:'Profile'}">Profile</router-link></li>
-            <li><div @click="logout" class="dropdown-item" >Logout</div></li>
+            <li v-if="this.loggedin == true"><div @click="logout" class="dropdown-item" >Logout</div></li>
           </ul>
         </li>
       </ul>
@@ -72,7 +72,7 @@
 export default {
   data(){
     return{
-     
+     loggedin: false
     }
   },
 
@@ -88,13 +88,36 @@ export default {
       }
       else{
       localStorage.clear();
+      this.loggedin = false
       alert("user logged out");
       this.$router.push({ name: "Home" });
       }
 
     },
   },
-}
+  mounted() {
+    if(localStorage.getItem("jwt")){
+      fetch("https://mullins-marine-api.herokuapp.com/users/oneuser/", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        this.loggedin = true;
+      })
+      .catch((err) => {
+        alert(err);
+      });
+    }
+    else{
+      this.loggedin = false
+    }
+  },
+  }
+
 </script>
 
 <style scoped>

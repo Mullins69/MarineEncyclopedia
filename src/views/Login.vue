@@ -1,7 +1,7 @@
 <template>
   <section id="Login">
     <div
-      class="container "
+      class="container"
       aria-hidden="false"
       aria-label="Dialog open. Sign in to start taking action"
     >
@@ -15,10 +15,12 @@
           <p>
             Not a ME Citizen yet?
             <button
-             data-bs-toggle="modal" data-bs-target="#registerModal"
+              data-bs-toggle="modal"
+              data-bs-target="#registerModal"
               aria-label="Not a Global Citizen yet? Sign up."
-              >Sign up</button
             >
+              Sign up
+            </button>
           </p>
           <div class="horizontal-rule-with-text">
             <hr />
@@ -30,67 +32,62 @@
       <div class="row">
         <div class="col-12">
           <form @submit.prevent="login">
-              <div id="login-fields">
-
-                  <div class="mb-4" >
-                    <div class="">
-                      <input
-                        type="email"
-                        aria-label="Email Address"
-                        v-model="email"
-                        required
-                        placeholder="Email Address"
-                      />
-                    </div>
-                  </div>
-                  <div class="mb-4" >
-                    <input
-                     v-model="password"
-                      type="password"
-                      required
-                      aria-label="Password"
-                      placeholder="Password"
-                    />
-                  </div>
-                  <button
-                    class="btn btn-primary w-100 mb-2 text-uppercase"
-                    type="submit"
-                    aria-label="Sign In"
-                    data-bs-dismiss="modal"
-                  >
-                    <span class=""><span class="">Sign In</span></span>
-                  </button>
+            <div id="login-fields">
+              <div class="mb-4">
+                <div class="">
+                  <input
+                    type="email"
+                    aria-label="Email Address"
+                    v-model="email"
+                    required
+                    placeholder="Email Address"
+                  />
+                </div>
               </div>
-            <fieldset class="text-left">
-            </fieldset>
+              <div class="mb-4">
+                <input
+                  v-model="password"
+                  type="password"
+                  required
+                  aria-label="Password"
+                  placeholder="Password"
+                />
+              </div>
+              <button
+                class="btn btn-primary w-100 mb-2 text-uppercase"
+                type="submit"
+                aria-label="Sign In"
+                data-bs-dismiss="modal"
+              >
+                <span class=""><span class="">Sign In</span></span>
+              </button>
+            </div>
+            <fieldset class="text-left"></fieldset>
           </form>
         </div>
       </div>
-       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-       <!-- <div v-if="loading" >
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+        Close
+      </button>
+      <!-- <div v-if="loading" >
  <div class="half-circle-spinner">
   <div class="circle circle-1"></div>
   <div class="circle circle-2"></div>
 </div>
    </div> -->
     </div>
-    
   </section>
   <!-- Modal -->
 
-<!-- Modal -->
+  <!-- Modal -->
 </template>
 
 <script>
-  
-
 export default {
- 
   data() {
     return {
       email: "",
       password: "",
-
     };
   },
   methods: {
@@ -107,13 +104,12 @@ export default {
       })
         .then((response) => response.json())
         .then((json) => {
-          if(json.jwt){
+          if (json.jwt) {
             localStorage.setItem("jwt", json.jwt);
           }
-          if(localStorage.getItem("jwt")){
-            this.$router.push({ name: "Profile" });
-          }
-          else{
+          if (localStorage.getItem("jwt")) {
+            location.reload();
+          } else {
             alert("Incorrect Credentials");
           }
         })
@@ -126,7 +122,6 @@ export default {
 </script>
 
 <style scoped>
-
 .container {
   display: grid;
   width: 100%;
@@ -148,12 +143,12 @@ export default {
   overflow-y: auto;
 }
 
-.horizontal-rule-with-text{
-    display: grid;
-    justify-content: center;
+.horizontal-rule-with-text {
+  display: grid;
+  justify-content: center;
 }
-form{
-    margin: 0 2px;
+form {
+  margin: 0 2px;
 }
 /* loader */
 /* 
