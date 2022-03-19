@@ -57,7 +57,6 @@
                 class="btn btn-primary w-100 mb-2 text-uppercase"
                 type="submit"
                 aria-label="Sign In"
-                data-bs-dismiss="modal"
               >
                 <span class=""><span class="">Sign In</span></span>
               </button>
@@ -88,6 +87,7 @@ export default {
     return {
       email: "",
       password: "",
+      
     };
   },
   methods: {

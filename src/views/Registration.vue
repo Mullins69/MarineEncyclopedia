@@ -31,7 +31,12 @@
             required
           />
         </div>
-
+        <div v-if="loading">
+          <div class="half-circle-spinner">
+            <div class="circle circle-1"></div>
+            <div class="circle circle-2"></div>
+          </div>
+        </div>
         <div class="col-md-12">
           <label class="labels">Mobile Number</label
           ><input
@@ -64,6 +69,13 @@
         <button class="btn btn-primary profile-button" type="submit">
           Create Account
         </button>
+        <button
+          type="button"
+          class="btn btn-secondary profile-button"
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button>
       </div>
     </div>
   </form>
@@ -81,10 +93,11 @@ export default {
       zipcode: "",
       country: "",
       city: "",
+      loading: false,
     };
   },
   methods: {
-    register() {
+    async register() {
       fetch("https://mullins-marine-api.herokuapp.com/users", {
         method: "POST",
         body: JSON.stringify({
@@ -103,9 +116,27 @@ export default {
       })
         .then((response) => response.json())
         .then((json) => {
-          alert("User registered");
+          this.loading = true;
           localStorage.setItem("jwt", json.jwt);
-          this.$router.push({ name: "Profile" });
+          try {
+            fetch("https://mullins-marine-api.herokuapp.com/contact/Register", {
+              method: "POST",
+              body: JSON.stringify({
+                email: this.email,
+              }),
+              headers: {
+                "Content-type": "application/json; charset=UTF-8",
+              },
+            })
+              .then((response) => response.json())
+              .then((json) => {
+                this.loading = false;
+                location.reload()
+              });
+          } catch (error) {
+            alert(err);
+            this.loading = false;
+          }
         })
         .catch((err) => {
           alert(err);
@@ -116,6 +147,48 @@ export default {
 </script>
 
 <style scoped>
+.half-circle-spinner,
+.half-circle-spinner * {
+  box-sizing: border-box;
+}
+
+.half-circle-spinner {
+  z-index: 2627;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
+
+.half-circle-spinner .circle {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  border: calc(60px / 10) solid transparent;
+}
+
+.half-circle-spinner .circle.circle-1 {
+  border-top-color: white;
+  animation: half-circle-spinner-animation 1s infinite;
+}
+
+.half-circle-spinner .circle.circle-2 {
+  border-bottom-color: #1d92ff;
+  animation: half-circle-spinner-animation 1s infinite alternate;
+}
+
+@keyframes half-circle-spinner-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .form-control:focus {
   box-shadow: none;
   border-color: #222222;
@@ -125,6 +198,7 @@ export default {
   background: rgb(0, 0, 0);
   box-shadow: none;
   border: none;
+  margin-left: 10px;
 }
 
 .profile-button:hover {

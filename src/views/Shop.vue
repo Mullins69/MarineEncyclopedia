@@ -190,6 +190,9 @@ export default {
     };
   },
   methods: {
+    checkout(){
+      
+    },
     clearCart() {
       fetch("https://mullins-marine-api.herokuapp.com/cart/", {
         method: "DELETE",

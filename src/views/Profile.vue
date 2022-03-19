@@ -1,126 +1,127 @@
 <template>
-<section>
-<div class="container rounded bg-white mt-5 mb-5 text-center" v-if="users">
-    <div class="row">
-      <div class="col-md-3 border-right">
-        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-          <img
-            class="rounded-circle mt-5"
-            
-            src="https://mpchsschool.in/wp-content/uploads/2019/10/default-profile-picture.png"
-          /><span class="font-weight-bold">{{ users.fullname }}</span
-          ><span class="text-black-50">{{ users.email }}</span
-          ><span> </span>
-        </div>
-      </div>
-      <div class="col-md-5 border-right">
-        <div class="p-3 py-5">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="text-right">Profile & Shipping Address</h4>
-          </div>
-          <div class="row mt-2">
-            <table class="table table-user-information">
-                    <tbody>
-                      <tr>
-                        <td>Name:</td>
-                        <td>{{users.fullname}}</td>
-                      </tr>
-                      <tr>
-                        <td>Email:</td>
-                        <td>{{users.email}}</td>
-                      </tr>
-                      <tr>
-                        <td>Shipping Address:</td>
-                        <td>{{users.street}}<br><br>
-                        {{users.city}}<br><br>
-                        {{users.zipcode}}<br><br>
-                        {{users.country}}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Phone:</td>
-                        <td>{{users.phone_number}}
-                        </td>
-                           
-                      </tr>
-
-                     
-                    </tbody>
-                  </table>
-          </div>
-
-          <div class="mt-5 text-center">
-            <button
-              data-bs-toggle="modal"
-              data-bs-target="#editUser"
-              class="btn btn-primary profilebtn"
-              type="button"
-            >
-              Edit
-            </button>
-          </div>
-          <div class="mt-5 text-center">
-            <button
-              class="btn btn-danger profile-button"
-              type="button"
-              @click="deleteUser"
-            >
-              Destroy User
-            </button>
+  <section>
+    <div class="container rounded bg-white mt-5 mb-5 text-center" v-if="users">
+      <div class="row">
+        <div class="col-md-3 border-right">
+          <div
+            class="d-flex flex-column align-items-center text-center p-3 py-5"
+          >
+            <img
+              class="rounded-circle mt-5"
+              src="https://mpchsschool.in/wp-content/uploads/2019/10/default-profile-picture.png"
+            /><span class="font-weight-bold">{{ users.fullname }}</span
+            ><span class="text-black-50">{{ users.email }}</span
+            ><span> </span>
           </div>
         </div>
+        <div class="col-md-5 border-right">
+          <div class="p-3 py-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="text-right">Profile & Shipping Address</h4>
+            </div>
+            <div class="row mt-2">
+              <table class="table table-user-information">
+                <tbody>
+                  <tr>
+                    <td>Name:</td>
+                    <td>{{ users.fullname }}</td>
+                  </tr>
+                  <tr>
+                    <td>Email:</td>
+                    <td>{{ users.email }}</td>
+                  </tr>
+                  <tr>
+                    <td>Shipping Address:</td>
+                    <td>
+                      {{ users.street }}<br /><br />
+                      {{ users.city }}<br /><br />
+                      {{ users.zipcode }}<br /><br />
+                      {{ users.country }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Phone:</td>
+                    <td>{{ users.phone_number }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="mt-5 text-center">
+              <button
+                data-bs-toggle="modal"
+                data-bs-target="#editUser"
+                class="btn btn-primary profilebtn"
+                type="button"
+              >
+                Edit
+              </button>
+            </div>
+            <div v-if="loading">
+              <div class="half-circle-spinner">
+                <div class="circle circle-1"></div>
+                <div class="circle circle-2"></div>
+              </div>
+            </div>
+            <div class="mt-5 text-center">
+              <button
+                class="btn btn-danger profile-button"
+                type="button"
+                @click="deleteUser"
+              >
+                Destroy User
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="else" v-else>
-    <div class="boxes">
-    <div class="box">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+    <div class="else" v-else>
+      <div class="boxes">
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
     </div>
-    <div class="box">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-    <div class="box">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-    <div class="box">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-</div>
-  </div>
     <!-- Modal -->
-  <div
-    class="modal fade"
-    id="editUser"
-    tabindex="-1"
-    aria-labelledby="editUserLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body">
-          <ProfileEdit />
+    <div
+      class="modal fade"
+      id="editUser"
+      tabindex="-1"
+      aria-labelledby="editUserLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <ProfileEdit />
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- Modal -->
-  
-</section>
-  
-
+    <!-- Modal -->
+  </section>
 </template>
 
 <script>
@@ -132,34 +133,55 @@ export default {
   data() {
     return {
       users: null,
+      email: null,
+      loading: false,
     };
   },
   methods: {
-    deleteUser() {
+    async deleteUser() {
       if (confirm("Do you really want to delete your profile?")) {
         if (!localStorage.getItem("jwt")) {
           alert("User not logged in");
-          return this.$router.push({ name: "Login" });
+          return this.$router.push({ name: "Home" });
         }
-        fetch("https://mullins-marine-api.herokuapp.com/users", {
-          method: "DELETE",
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-          },
-        })
-          .then((response) => response.json())
-          .then((json) => {
-            alert("DELETED USER");
-            localStorage.clear();
-            return this.$router.push({ name: "Home" });
+
+        this.loading = true;
+        try {
+          fetch("https://mullins-marine-api.herokuapp.com/contact/DeleteUser", {
+            method: "POST",
+            body: JSON.stringify({
+              email: this.email,
+            }),
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
           })
-          .catch((err) => {
-            alert(err);
-          });
+            .then((response) => response.json())
+            .then((json) => {
+              this.loading = false;
+              fetch("https://mullins-marine-api.herokuapp.com/users", {
+                method: "DELETE",
+                headers: {
+                  "Content-type": "application/json; charset=UTF-8",
+                  Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+                },
+              })
+                .then((response) => response.json())
+                .then((json) => {
+                  alert("DELETED USER");
+                  localStorage.clear();
+                  return this.$router.push({ name: "Home" });
+                })
+                .catch((err) => {
+                  alert(err);
+                });
+            });
+        } catch (error) {
+          alert(err);
+          this.loading = false;
+        }
       }
     },
-
   },
   mounted() {
     if (!localStorage.getItem("jwt")) {
@@ -175,6 +197,7 @@ export default {
       .then((response) => response.json())
       .then((json) => {
         this.users = json;
+        this.email = json.email;
       })
       .catch((err) => {
         alert(err);
@@ -184,6 +207,48 @@ export default {
 </script>
 
 <style scoped>
+.half-circle-spinner,
+.half-circle-spinner * {
+  box-sizing: border-box;
+}
+
+.half-circle-spinner {
+  z-index: 2627;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
+
+.half-circle-spinner .circle {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  border: calc(60px / 10) solid transparent;
+}
+
+.half-circle-spinner .circle.circle-1 {
+  border-top-color: white;
+  animation: half-circle-spinner-animation 1s infinite;
+}
+
+.half-circle-spinner .circle.circle-2 {
+  border-bottom-color: #1d92ff;
+  animation: half-circle-spinner-animation 1s infinite alternate;
+}
+
+@keyframes half-circle-spinner-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .else {
   min-height: 100vh;
   font-family: Roboto, Arial;
@@ -368,7 +433,7 @@ export default {
 .labels {
   font-size: 11px;
 }
-.rounded-circle{
+.rounded-circle {
   height: 280px;
 }
 
