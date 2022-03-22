@@ -45,9 +45,6 @@ Your browser does not support the video tag.
 
         </div>
         <div class="col-lg-3">
-            <p class="mt-4">
-            Contact: +27683808628
-          </p>
           <p class="mt-4">
             Email: mullinsatheem@gmail.com
           </p>
@@ -55,7 +52,7 @@ Your browser does not support the video tag.
             Social Media: <a href="https://www.linkedin.com/in/abdul-atheem-mullins-4a0229222/" target="_blank"><i class="bi bi-linkedin"></i></a>
           </p>
           <p>
-            <button class="btn btn-primary"><a class="donate" href="https://paypal.me/abdulmullins" target="_blank"> Donate Now</a></button>
+            <button class="btn "><a class="donate" href="https://paypal.me/abdulmullins" target="_blank"> Donate Now</a></button>
           </p>
         </div>
       </div>
@@ -69,10 +66,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .donate {
   text-decoration: none;
   color: white;
+}
+.btn{
+  background-color: #003459;
 }
 .donate:hover{
   color: white;

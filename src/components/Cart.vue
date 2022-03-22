@@ -23,6 +23,7 @@
           </div>
 
         </div>
+        <button @click="deleteItem(carts._id)">Remove</button>
         <hr>
 
         
@@ -46,7 +47,26 @@ export default {
     }
   },
   methods: {
-   
+   deleteItem(id){
+     fetch("https://mullins-marine-api.herokuapp.com/cart/single", {
+        method: "DELETE",
+        body: JSON.stringify({
+          id: id,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          location.reload()
+            
+          })
+        .catch((err) => {
+          alert(err);
+        });
+   }
    },
   mounted(){
     if (!localStorage.getItem("jwt")) {
@@ -63,10 +83,7 @@ export default {
       })
         .then((response) => response.json())
         .then((json) => {
-          this.cart = json;
-          console.log(this.cart)
-         
-            
+          this.cart = json;            
           })
         .catch((err) => {
           alert(err);

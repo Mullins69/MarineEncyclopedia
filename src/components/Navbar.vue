@@ -24,6 +24,9 @@
         <li class="nav-item">
            <router-link class="nav-link"  :to="{name: 'Contact'}">ContactUs</router-link>
         </li>
+        <li class="nav-item" v-if="isadmin== true">
+           <router-link class="nav-link"  :to="{name: 'Admin'}">Dashboard</router-link>
+        </li>
       </ul>
       <ul class="navbar-nav dr mb-2 mb-lg-0">
          <li class="nav-item" v-if="this.loggedin == false">
@@ -72,7 +75,8 @@
 export default {
   data(){
     return{
-     loggedin: false
+     loggedin: false,
+     isadmin:false
     }
   },
 
@@ -91,6 +95,7 @@ export default {
       this.loggedin = false
       alert("user logged out");
       this.$router.push({ name: "Home" });
+      location.reload()
       }
 
     },
@@ -107,6 +112,7 @@ export default {
       .then((response) => response.json())
       .then((json) => {
         this.loggedin = true;
+        this.isadmin = json.isadmin
       })
       .catch((err) => {
         alert(err);

@@ -9,7 +9,6 @@
         <div class="">
           <div class="d-flex justify-content-between align-items-center mb-3">
             <h4 class="text-right">Edit Product</h4>
-
           </div>
         </div>
       </div>
@@ -65,11 +64,11 @@ export default {
     return {
       product: null,
       isadmin: false,
-      title: "",
-      category: "",
-      description: "",
-      price: "",
-      img: "",
+      title: null,
+      category: null,
+      description: null,
+      price: null,
+      img: null,
     };
   },
   methods: {
@@ -77,7 +76,7 @@ export default {
       if (this.isadmin == true) {
         fetch("https://mullins-marine-api.herokuapp.com/product/" + this.id, {
           method: "PUT",
-          
+
           body: JSON.stringify({
             title: this.title,
             category: this.category,
@@ -111,15 +110,23 @@ export default {
         .then((json) => {
           if (json.isadmin == true) {
             this.isadmin = json.isadmin;
-            fetch("https://mullins-marine-api.herokuapp.com/product/"+ this.id, {
-              method: "GET",
-              headers: {
-                "Content-type": "application/json; charset=UTF-8",
-              },
-            })
+            fetch(
+              "https://mullins-marine-api.herokuapp.com/product/" + this.id,
+              {
+                method: "GET",
+                headers: {
+                  "Content-type": "application/json; charset=UTF-8",
+                },
+              }
+            )
               .then((response) => response.json())
               .then((json) => {
                 this.product = json;
+                this.title = json.title;
+                this.category = json.category;
+                this.description = json.description;
+                this.price = json.price;
+                this.img = json.img;
               })
               .catch((err) => {
                 alert(err);

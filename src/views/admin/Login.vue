@@ -5,30 +5,9 @@
       aria-hidden="false"
       aria-label="Dialog open. Sign in to start taking action"
     >
-      <div class="row">
-        <div class="col-12">
-          <p>
-            Welcome back!
-            <br />
-            Sign in to start taking action.
-          </p>
-          <p>
-            Not a ME Citizen yet?
-            <button
-              data-bs-toggle="modal"
-              data-bs-target="#registerModal"
-              aria-label="Not a Global Citizen yet? Sign up."
-            >
-              Sign up
-            </button>
-          </p>
-          <div class="horizontal-rule-with-text">
-            <hr />
-            <span>or</span>
-            <hr />
-          </div>
-        </div>
-      </div>
+    <h3>
+        Admin Login
+    </h3>
       <div class="row">
         <div class="col-12">
           <form @submit.prevent="login">
@@ -65,20 +44,10 @@
           </form>
         </div>
       </div>
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-        Close
-      </button>
-      <!-- <div v-if="loading" >
- <div class="half-circle-spinner">
-  <div class="circle circle-1"></div>
-  <div class="circle circle-2"></div>
-</div>
-   </div> -->
+
+
     </div>
   </section>
-  <!-- Modal -->
-
-  <!-- Modal -->
 </template>
 
 <script>
@@ -87,7 +56,6 @@ export default {
     return {
       email: "",
       password: "",
-      
     };
   },
   methods: {
@@ -119,6 +87,33 @@ export default {
         });
     },
   },
+  mounted(){
+      
+      if(localStorage.getItem("jwt")){
+          fetch("https://mullins-marine-api.herokuapp.com/users/oneuser/", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+          let isadmin = json.isadmin;
+        if(isadmin == true){
+            this.$router.push({ name: "Admin" });
+        }
+        if(isadmin ==false){
+            alert("You are Not ADMIN")
+            this.$router.push({ name: "Home" });
+        }
+      })
+      .catch((err) => {
+        alert(err);
+      });
+      }
+
+  }
 };
 </script>
 
@@ -126,7 +121,7 @@ export default {
 .container {
   display: grid;
   width: 100%;
-  min-width: 50%;
+  min-width: 100%;
   justify-content: center;
   align-content: center;
   text-align: left;
