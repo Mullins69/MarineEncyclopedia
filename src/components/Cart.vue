@@ -27,19 +27,19 @@
               <p id="cartItem1Price">PRICE: R{{ data.price }}</p>
             </div>
           </div>
-          <button class="btn btn-warning" @click="deleteItem(carts._id)">Remove</button>
+          <button class="btn btn-warning" @click="deleteItem(carts._id)">
+            Remove
+          </button>
           <hr />
         </div>
         <div class="col-12">
           <h3>total: {{ total }}</h3>
           <div v-if="total > 0">
-             <button id="btn-checkout" class="btn btn-primary" @click="checkOut">
-                <span>Checkout</span>
-              </button>
+            <button id="btn-checkout" class="btn btn-primary" @click="checkOut">
+              <span>Checkout</span>
+            </button>
           </div>
-         
         </div>
-
       </div>
     </div>
   </main>
@@ -51,6 +51,10 @@ export default {
     return {
       cart: null,
       email: null,
+      street: null,
+      city: null,
+      zipcode: null,
+      country: null,
     };
   },
   methods: {
@@ -61,17 +65,21 @@ export default {
           email: this.email,
           cart: this.cart,
           price: this.total,
+          street:this.street,
+          city: this.city,
+          zipcode: this.zipcode,
+          country: this.country,
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },
       })
         .then((response) => {
-          console.log(response)
-          return response.json()
+          console.log(response);
+          return response.json();
         })
         .then((json) => {
-          console.log(json.msg)
+          console.log(json.msg);
           fetch("https://mullins-marine-api.herokuapp.com/cart/", {
             method: "DELETE",
             headers: {
@@ -87,7 +95,8 @@ export default {
             .catch((err) => {
               alert(err);
             });
-        }).catch(e => console.log(e));
+        })
+        .catch((e) => console.log(e));
     },
     deleteItem(id) {
       fetch("https://mullins-marine-api.herokuapp.com/cart/single", {
@@ -124,7 +133,7 @@ export default {
         .then((response) => response.json())
         .then((json) => {
           this.cart = json;
-          console.log(this.cart)
+          console.log(this.cart);
         })
         .catch((err) => {
           alert(err);
@@ -139,6 +148,10 @@ export default {
         .then((response) => response.json())
         .then((json) => {
           this.email = json.email;
+          this.street = json.street;
+          this.city = json.city;
+          this.zipcode = json.zipcode;
+          this.country = json.country;
         })
         .catch((err) => {
           alert(err);
