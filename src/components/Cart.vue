@@ -27,7 +27,7 @@
               <p id="cartItem1Price">PRICE: R{{ data.price }}</p>
             </div>
           </div>
-          <button @click="deleteItem(carts._id)">Remove</button>
+          <button class="btn btn-warning" @click="deleteItem(carts._id)">Remove</button>
           <hr />
         </div>
         <div class="col-12">
