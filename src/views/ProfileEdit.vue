@@ -36,7 +36,7 @@
         <div class="col-md-12">
           <label class="labels">Mobile Number</label
           ><input
-            type="text"
+            type="number"
             class="form-control"
             :placeholder="users.phone_number"
             v-model="phone_number"

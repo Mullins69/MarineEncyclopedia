@@ -30,6 +30,7 @@
           <br />
           <span>Country :</span> {{ user.country }}
           <br />
+          
         </p>
       </div>
     </div>

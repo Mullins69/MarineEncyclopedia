@@ -40,7 +40,7 @@
         <div class="col-md-12">
           <label class="labels">Mobile Number</label
           ><input
-            type="text"
+            type="number"
             class="form-control"
             v-model="phone_number"
             required
