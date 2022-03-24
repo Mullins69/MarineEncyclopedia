@@ -1,5 +1,6 @@
 <template>
-  <div class="container">
+<section>
+  <div class="container" v-if="this.isadmin == true">
     <h1>Admin Dashboard</h1>
     <div class="row">
       <div class="col">
@@ -34,7 +35,19 @@
     </div>
     <div class="row">
       <h1>All Products</h1>
-      <button class="btn btn-primary">Create Product</button>
+      <!-- Button trigger modal -->
+      <button
+      @click="isModalVisible = true"
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        Create Product
+      </button>
+
+      <!-- Modal -->
+      
       <div class="row">
         <div class="col-4">
           <select
@@ -105,38 +118,77 @@
       </div>
     </div>
   </div>
+  <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+        v-if="isModalVisible"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <create-product />
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
 </template>
 
 <script>
+import CreateProduct from "../../components/CreateProduct.vue";
 export default {
   data() {
     return {
+      isModalVisible: false,
+
+      isadmin: false,
       users: null,
       product: null,
       search: "",
       selected: "",
     };
   },
+  components: {
+    CreateProduct
+  },
   methods: {
     deleteProduct(id) {
       if (confirm("Do you really want to delete this product?")) {
-        if (this.isadmin == true) {
-          fetch("https://mullins-marine-api.herokuapp.com/product/" + id, {
-            method: "DELETE",
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-              Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-            },
+        fetch("https://mullins-marine-api.herokuapp.com/product/" + id, {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
+        })
+          .then((response) => response.json())
+          .then((json) => {
+            alert("DELETED PRODUCT");
+            location.reload();
           })
-            .then((response) => response.json())
-            .then((json) => {
-              alert("DELETED PRODUCT");
-              location.reload();
-            })
-            .catch((err) => {
-              alert(err);
-            });
-        }
+          .catch((err) => {
+            alert(err);
+          });
       }
     },
   },
@@ -151,8 +203,8 @@ export default {
       })
         .then((response) => response.json())
         .then((json) => {
-          let isadmin = json.isadmin;
-          if (isadmin == true) {
+          this.isadmin = json.isadmin;
+          if (this.isadmin == true) {
             fetch("https://mullins-marine-api.herokuapp.com/product", {
               method: "GET",
               headers: {
@@ -181,7 +233,7 @@ export default {
                 alert(err);
               });
           }
-          if (isadmin == false) {
+          if (this.isadmin == false) {
             alert("You are Not ADMIN");
             this.$router.push({ name: "Home" });
           }
@@ -189,10 +241,9 @@ export default {
         .catch((err) => {
           alert(err);
         });
-    }
-    else{
-      alert("Please Login")
-      this.$router.push({ name: "Home" });
+    } else {
+      alert("Please Login");
+      this.$router.push({ name: "AdminLogin" });
     }
   },
   computed: {

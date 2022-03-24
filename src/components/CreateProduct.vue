@@ -1,14 +1,13 @@
 <template>
   <form
     class="container rounded bg-white mb-5 text-center"
-    @submit.prevent="editProduct"
-    v-if="product"
+    @submit.prevent="createProduct"
   >
     <div class="row">
       <div class="col-md-12 border-right">
         <div class="">
           <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="text-right">Edit Product</h4>
+            <h4 class="text-right">Create Product</h4>
           </div>
         </div>
       </div>
@@ -19,12 +18,12 @@
         </div>
         <div class="col-md-12">
           <label class="labels">Category</label
-          ><input type="text" class="form-control" v-model="category" />
-          <!-- <select class="form-control" name="category" id="category">
-              <option value="masks">Masks</option>
+          >
+          <select class="form-control" v-model="category">
+              <option selected value="masks">Masks</option>
               <option value="wetsuits">Wetsuits</option>
               <option value="camera">Camera</option>
-          </select> -->
+          </select>
         </div>
       </div>
       <div class="row mt-3">
@@ -50,7 +49,7 @@
 
       <div class="mt-5 text-center">
         <button class="btn btn-primary profile-button" type="submit">
-          Confirm Changes
+          Confirm
         </button>
       </div>
     </div>
@@ -59,23 +58,21 @@
 
 <script>
 export default {
-  props: ["id"],
   data() {
     return {
-      product: null,
       isadmin: false,
-      title: null,
-      category: null,
-      description: null,
-      price: null,
-      img: null,
+      title: "",
+      category: "",
+      description:"",
+      price: "",
+      img: "",
     };
   },
   methods: {
-    editProduct() {
+    createProduct() {
       if (this.isadmin == true) {
-        fetch("https://mullins-marine-api.herokuapp.com/product/" + this.id, {
-          method: "PUT",
+        fetch("https://mullins-marine-api.herokuapp.com/product/" , {
+          method: "POST",
           body: JSON.stringify({
             title: this.title,
             category: this.category,
@@ -90,7 +87,7 @@ export default {
         })
           .then((response) => response.json())
           .then((json) => {
-            alert("Product Updated");
+            alert("Product Created");
             return this.$router.push({ name: "Shop" });
           });
       }
@@ -109,28 +106,6 @@ export default {
         .then((json) => {
           if (json.isadmin == true) {
             this.isadmin = json.isadmin;
-            fetch(
-              "https://mullins-marine-api.herokuapp.com/product/" + this.id,
-              {
-                method: "GET",
-                headers: {
-                  "Content-type": "application/json; charset=UTF-8",
-                },
-              }
-            )
-              .then((response) => response.json())
-              .then((json) => {
-                this.product = json;
-                this.title = json.title;
-                this.category = json.category;
-                this.description = json.description;
-                this.price = json.price;
-                this.img = json.img;
-              })
-              .catch((err) => {
-                alert(err);
-                console.log(err);
-              });
           }
         })
         .catch((err) => {
